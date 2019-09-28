@@ -1,11 +1,6 @@
 # python-sentiment-bot
 Python Sentiment Analysis Bot (Topics CS 3030 - Final Project)
 
-Group Members:
-Bryce Hewett
-Tyler Schumacher
-Simeon Wuthier
-
 Proposal Idea:
 To create a basic sentiment analysis program that will parse messages and comments through social media, as well as possibly various cryptocurrency exchanges and maybe even news articles to gauge the overall "vibe" of the cryptocurrency or stock market regarding a specific product or group of products.
 
