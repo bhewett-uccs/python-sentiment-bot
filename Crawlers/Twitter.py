@@ -1,4 +1,6 @@
 # Fetch data from
-def fetch()
-	print('Twitter fetch() was called.')
-	return 4
+def fetch():
+	print('Twitter stuff...')
+	return 8
+
+print('Twitter initialized.')
