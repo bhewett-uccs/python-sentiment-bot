@@ -1,6 +1,6 @@
-# Fetch data from
+# Returns the sentiment for this service
 def fetch():
 	print('Investing.com stuff...')
 	return 4
 
-print("Investing.com initialized.")
+print("Initialized Investing.com")
