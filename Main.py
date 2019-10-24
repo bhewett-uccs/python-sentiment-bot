@@ -76,7 +76,7 @@ def getSentiment():
 				return 0
 
 		print()
-	if numSentiments == 0:
+	if numSentiments == 0: # Avoid division by zero if there are no files
 		return 0
 	return sumSentiments / numSentiments
 
@@ -86,6 +86,6 @@ sentiment = getSentiment()
 print('=' * width)
 rprint(f'Overall Bitcoin sentiment: {sentiment}')
 if sentiment > 0:
-	rprint('BUY')
+	rprint('(BUY)')
 elif sentiment < 0:
-	rprint('SELL')
+	rprint('(SELL)')
