@@ -1,8 +1,27 @@
 import os
+import sys
+import traceback
+import re
 
 # Print a right-aligned message
 def rprint(text):
-	print(text.rjust(width))
+
+	lines = text.split('\n')
+	if len(lines) == 1:
+		print(text.rjust(width))
+	else:
+		for line in lines:
+			rprint(line)
+
+# Print an exception nicely to the screen
+def printException(e):
+	tb = '\n' + traceback.format_exc()
+	tb = re.sub(r'File "Main.py",.*\n.*', '', tb) # Remove Main file errors
+	tb = re.sub(r'\n\s+\n', '\n', tb)
+	lines = tb.split('\n')
+	for i in range(len(lines)): # Remove the file path, replace with just file name
+		lines[i] = re.sub(r'File ".*\\([A-z\.]+)"', r'File "\1"', lines[i])
+	rprint('\n'.join(lines))
 
 # Initialize all modules
 def init():
@@ -20,17 +39,21 @@ def init():
 		if not os.path.isfile('Crawlers/' + file): # directory
 			continue
 		if not file.endswith('.py') or file.count('.') > 1:
-			print(f'Invalid file name "{file}"')
+			rprint(f'Invalid file name "{file}"')
 			continue
 		# Extract the file name without the extension
 		name = file.split('.')[0]
 		# Import the module object
-		module = __import__('Crawlers', fromlist = [name])
-		# Convert the module objects into key-value pairs
-		for (key, value) in module.__dict__.items():
-			if(key.startswith('__')):
-				continue
-			crawlers[key + '.py'] = value
+		try:
+			module = __import__('Crawlers', fromlist = [name])
+			# Convert the module objects into key-value pairs
+			for (key, value) in module.__dict__.items():
+				if(key.startswith('__')):
+					continue
+				crawlers[key + '.py'] = value
+		except Exception as e:
+			printException(e)
+
 
 # Call the fetch() function within each module
 def getSentiment():
@@ -39,14 +62,19 @@ def getSentiment():
 	for (name, module) in crawlers.items():
 		print()
 		print('_' * width)
-		rprint(f'Fetching from {name}   ')
+		rprint(f'Fetching from {name}')
 		if not 'fetch' in dir(module):
-			print(f'{name} does not have a fetch() function   ')
+			print(f'{name} does not have a fetch() function')
 		else:
-			sentiment = module.fetch()
-			sumSentiments += sentiment
-			numSentiments += 1
-			rprint(f'Sentiment from {name}: {sentiment}')
+			try:
+				sentiment = module.fetch()
+				sumSentiments += sentiment
+				numSentiments += 1
+				rprint(f'Sentiment from {name}: {sentiment}')
+			except Exception as e:
+				printException(e)
+				return 0
+
 		print()
 	if numSentiments == 0:
 		return 0
