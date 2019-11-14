@@ -80,12 +80,14 @@ def getSentiment():
 		return 0
 	return sumSentiments / numSentiments
 
+def main():
+	init()
+	sentiment = getSentiment()
+	print('=' * width)
+	rprint(f'Overall Bitcoin sentiment: {sentiment}')
+	if sentiment > 0:
+		rprint('(BUY)')
+	elif sentiment < 0:
+		rprint('(SELL)')
 
-init()
-sentiment = getSentiment()
-print('=' * width)
-rprint(f'Overall Bitcoin sentiment: {sentiment}')
-if sentiment > 0:
-	rprint('(BUY)')
-elif sentiment < 0:
-	rprint('(SELL)')
+main()
