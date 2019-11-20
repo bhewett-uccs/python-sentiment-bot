@@ -7,7 +7,7 @@ def sentiment(sentence):
 	opinion = TextBlob(sentence)
 	return opinion.sentiment.polarity
 
-def analyzeTwitterProfile(handle):
+def analyzeTwitterProfile(handle, keyword):
 	url = 'https://twitter.com/' + handle
 	headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36'}
 	response = requests.get(url, headers=headers)
@@ -24,7 +24,7 @@ def analyzeTwitterProfile(handle):
 	sentimentCounter = 0
 	sentimentSum = 0
 	for tweet in tweets:
-		if 'bitcoin' in tweet:
+		if keyword.lower() in tweet:
 			sentimentSum += sentiment(tweet)
 			sentimentCounter += 1
 
@@ -37,53 +37,57 @@ def analyzeTwitterProfile(handle):
 
 
 # Returns the sentiment for this service
-def fetch():
+def fetch(keyword):
 	sentimentSum = 0;
 	sentimentCounter = 0
 
 	# A list of the top Bitcoin experts and market movers
-	sentimentSum += analyzeTwitterProfile('aantonop')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('brian_armstrong')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('brucefenton')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('brockpierce')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('lopp')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('jonmatonis')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('NickSzabo4')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('peterktodd')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('pwuille')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('kyletorpey')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('eric_lombrozo')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('erikfinman')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('TheDeadReds')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('CoinFestUK')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('queentatiana')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('victoriavaneyk')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('BryceWeiner')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('derose')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('brianchoffman')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('blythemasters')
-	sentimentCounter += 1
-	sentimentSum += analyzeTwitterProfile('rogerkver')
-	sentimentCounter += 1
-	return sentimentSum / sentimentCounter
+	sentimentSum += analyzeTwitterProfile('aantonop', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('brian_armstrong', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('brucefenton', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('brockpierce', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('lopp', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('jonmatonis', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('NickSzabo4', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('peterktodd', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('pwuille', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('kyletorpey', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('eric_lombrozo', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('erikfinman', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('TheDeadReds', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('CoinFestUK', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('queentatiana', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('victoriavaneyk', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('BryceWeiner', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('derose', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('brianchoffman', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('blythemasters', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+	sentimentSum += analyzeTwitterProfile('rogerkver', keyword)
+	if sentimentSum != 0: sentimentCounter += 1
+
+	if sentimentCounter == 0:
+		return 0 # Avoid division by zero
+	else:
+		return sentimentSum / sentimentCounter
 
 print('Initialized Twitter')
