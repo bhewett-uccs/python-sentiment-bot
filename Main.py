@@ -55,8 +55,8 @@ def init():
 			printException(e)
 
 
-# Call the fetch() function within each module
-def getSentiment():
+# Call the fetch(keyword) function within each module
+def getSentiment(keyword):
 	sumSentiments = 0
 	numSentiments = 0
 	for (name, module) in crawlers.items():
@@ -67,7 +67,7 @@ def getSentiment():
 			print(f'{name} does not have a fetch() function')
 		else:
 			try:
-				sentiment = module.fetch()
+				sentiment = module.fetch(keyword)
 				sumSentiments += sentiment
 				numSentiments += 1
 				rprint(f'Sentiment from {name}: {sentiment}')
@@ -80,9 +80,9 @@ def getSentiment():
 		return 0
 	return sumSentiments / numSentiments
 
-def main():
+def main(keyword):
 	init()
-	sentiment = getSentiment()
+	sentiment = getSentiment(keyword)
 	print('=' * width)
 	rprint(f'Overall Bitcoin sentiment: {sentiment}')
 	if sentiment > 0:
@@ -90,4 +90,5 @@ def main():
 	elif sentiment < 0:
 		rprint('(SELL)')
 
-main()
+keyword = input('Enter a sentiment topic: ').lower()
+main(keyword)
