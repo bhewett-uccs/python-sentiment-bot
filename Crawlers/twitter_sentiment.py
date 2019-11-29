@@ -7,7 +7,6 @@ import datetime
 import os
 from dotenv import load_dotenv
 from collections import deque
-import pprint
 
 load_dotenv()
 
@@ -130,7 +129,6 @@ class TwitterSentimentBot:
         aggregate_sentiment_dict = {}
 
         now = self.get_utc_now()
-        # for period in sorted(time_periods):
         for i in range(self.lookback_period):
             positive_scores = []
             negative_scores = []
