@@ -10,7 +10,6 @@ def fetch(keyword):
 		interest = pytrend.interest_over_time()
 		print(interest)
 		searches = list(interest[keyword])
-		searches = [10, 20]
 		differenceSum = 0
 		differenceCount = -1
 		prevNum = searches[0]
@@ -18,7 +17,7 @@ def fetch(keyword):
 			differenceSum += num - prevNum
 			prevNum = num
 			differenceCount += 1
-		return differenceSum / differenceCount / 10 # Every ten sloped searches increases the sentiment by 1
+		return differenceSum / differenceCount / 5 # Every five sloped searches increases the sentiment by 1
 	except:
 		return 0
 
