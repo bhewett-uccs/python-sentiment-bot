@@ -60,7 +60,7 @@ class TwitterSentimentBot:
     def get_utc_now(self):
         """ Gets a normalized UTC datetime object """
         now = datetime.datetime.utcnow()
-        utc_now = datetime.datetime(now.year, now.month, now.day, 6, 0, 0, 0)
+        utc_now = datetime.datetime(now.year, now.month, now.day, 0, 0, 0, 0)
         return utc_now
 
     def get_user_list(self):
@@ -126,7 +126,7 @@ class TwitterSentimentBot:
 
     def build_aggregate_sentiment(self, user_sentiment_dict):
         """ Builds and calculates the aggregated sentiment across all users for a range of given time periods """
-        aggregate_sentiment_dict = {}
+        aggregate_sentiment_list = []
 
         now = self.get_utc_now()
         for i in range(self.lookback_period):
@@ -155,10 +155,11 @@ class TwitterSentimentBot:
                     elif score == 0:
                         neutral_scores.append(0)
 
-            aggregate_sentiment_dict[end_date.strftime("%Y-%m-%d")] = self.get_aggregate_geometric_avg(positive_scores,
-                                                                                                       negative_scores,
-                                                                                                       neutral_scores)
-        return aggregate_sentiment_dict
+            aggregate_sentiment_list.append((end_date.strftime("%Y-%m-%d"),
+                                             self.get_aggregate_geometric_avg(positive_scores,
+                                                                              negative_scores,
+                                                                              neutral_scores)))
+        return aggregate_sentiment_list
 
     def fetch(self, num_days_sentiment=None):
         """ Main public-facing function used to grab total aggregate sentiment and return it """
@@ -166,3 +167,8 @@ class TwitterSentimentBot:
             self.lookback_period = num_days_sentiment
 
         return self.build_aggregate_sentiment(self.harvest_twitter_user_sentiment())
+
+
+def fetch(symbol=None, num_days=None):
+    bot = TwitterSentimentBot(symbol)
+    return bot.fetch(num_days)
