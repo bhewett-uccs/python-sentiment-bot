@@ -141,8 +141,9 @@ def computeBtnClick():
 		alert(f'The conclusion for "{keyword.capitalize()}" is WAIT\n\nSentiment = {sentiment}', 'Sentiment: WAIT.')
 
 # Make a message dialog
-def alert(msg, title):   
-	ctypes.windll.user32.MessageBoxW(0, msg, title, 0)
+def alert(msg, title):
+        if os.name == "nt":
+        	ctypes.windll.user32.MessageBoxW(0, msg, title, 0)
 
 # Overrides the current print
 def print(*args, **kwargs):
