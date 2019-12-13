@@ -10,6 +10,11 @@ The proposal idea is to create a basic sentiment analysis program that will pars
 
 Movements in various markets involving securities (e.g. cryptocurrencies) are heavily influenced by the underlying mood of the market participants trading and investing in those markets. For instance, if price is climbing rapidly there's a tendancy for the emotions of those involved in the market to be positive, whereas if the price is dropping rapidly the underlying emotions will likely be negative. Using this information from a trading standpoint, an invester can make better-informed decisions based upon how they interpret the results of the overall market sentiment. Some may want to enter a trade once the rest of the market is positive (or "bullish") whereas for others this will be interpreted as a sign to sell and exit the market (or "bearish").
 
+
+> A sentiment score greater than zero means that the overall market sentiment is positive.
+> 
+> A sentiment score less than zero means that the overall market sentiment is negative.
+
 ---
 
 ### The implemented sentiment bots are as follows:
@@ -68,11 +73,10 @@ The bar at the top is the progress bar, the group of controls at the bottom cons
 Please be patient while the sentiment analysis is working.
 
 Upon completing the sentiment analysis, the results will be displayed.
+
 ![](Resources/Screens/screen2.png)
 
-> A sentiment score greater than zero means that the overall market sentiment is positive.
-
-> A sentiment score less than zero means that the overall market sentiment is negative.
+The sentiment analysis changes over time, which is why it is important to check the results regularly.
 
 ---
 
