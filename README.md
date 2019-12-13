@@ -62,13 +62,17 @@ Start the application
 python3 Main.py
 ```
 You will the be met with the following user interface:
-!()[Resources/Screens/screen1.png]
+![](Resources/Screens/screen1.png)
 The bar at the top is the progress bar, the group of controls at the bottom consist of the sentiment subject, allowing you to enter any topic to run the sentiment analysis on, and the "Compute Sentiment" button, which will begin the sentiment analysis. The progress of the sentiment analysis will be displayed within the box in the middle of the interface.
 
 Please be patient while the sentiment analysis is working.
 
 Upon completing the sentiment analysis, the results will be displayed.
-!()[Resources/Screens/screen1.png]
+![](Resources/Screens/screen2.png)
+
+> A sentiment score greater than zero means that the overall market sentiment is positive.
+
+> A sentiment score less than zero means that the overall market sentiment is negative.
 
 ---
 
