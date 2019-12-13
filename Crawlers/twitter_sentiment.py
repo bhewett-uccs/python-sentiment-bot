@@ -171,4 +171,10 @@ class TwitterSentimentBot:
 
 def fetch(symbol=None, num_days=None):
     bot = TwitterSentimentBot(symbol)
-    return bot.fetch(num_days)
+    try:
+        sentiment = bot.fetch(num_days)[0][1]
+    except IndexError:
+        sentiment = 999
+    return sentiment
+
+print('Initialized Twitter')
