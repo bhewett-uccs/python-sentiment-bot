@@ -150,3 +150,5 @@ class NewsSentimentBot:
 def fetch(symbol=None):
     bot = NewsSentimentBot(symbol=symbol)
     return bot.fetch()
+
+print('Initialized News Sentiment')
