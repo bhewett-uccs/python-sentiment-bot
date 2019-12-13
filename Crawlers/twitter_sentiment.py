@@ -176,3 +176,5 @@ def fetch(symbol=None, num_days=None):
     except IndexError:
         sentiment = 999
     return sentiment
+
+print('Initialized Twitter')
