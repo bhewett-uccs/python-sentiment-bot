@@ -169,10 +169,10 @@ class TwitterSentimentBot:
         return self.build_aggregate_sentiment(self.harvest_twitter_user_sentiment())
 
 
-def fetch(symbol=None, num_days=None):
+def fetch(symbol=None):
     bot = TwitterSentimentBot(symbol)
     try:
-        sentiment = bot.fetch(num_days)[0][1]
+        sentiment = bot.fetch()[0][1]
     except IndexError:
         sentiment = 999
     return sentiment
