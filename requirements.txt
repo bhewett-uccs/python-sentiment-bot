@@ -4,7 +4,7 @@ pandas==0.25.3
 tweet_preprocessor==0.5.0
 yaspin==0.15.0
 pytrends==4.7.2
-requests==2.22.0
+requests==2.31.0
 beautifulsoup4==4.8.1
 PySide2==5.13.2
 python-dotenv==0.10.3
